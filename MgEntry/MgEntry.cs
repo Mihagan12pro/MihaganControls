@@ -80,7 +80,7 @@ namespace MihaganControls.MgEntry
         protected virtual bool CheckText()
         {
 
-            return false;
+            return true;
         }
 
 
@@ -108,7 +108,6 @@ namespace MihaganControls.MgEntry
             Foreground = NormalForeground;
 
             IsValid = CheckText();
-
 
             if (!IsValid)
             {
