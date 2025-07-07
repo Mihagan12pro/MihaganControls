@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -17,6 +16,7 @@ namespace MihaganControls.MgEntry
     {
         protected string? oldText;
 
+        protected static List<MgEntry> mgEntries = new List<MgEntry>();
 
         public readonly static DependencyProperty IsValidProperty = DependencyProperty.Register
             (
@@ -158,9 +158,23 @@ namespace MihaganControls.MgEntry
         }
 
 
+        public static bool EveryEntryIsValid()
+        {
+            foreach(MgEntry entry in mgEntries)
+            {
+                if (!entry.IsValid)
+                    return false;
+            }
+
+            return true;
+        }
+
+
         public MgEntry()
         {
             TextChanged += MgEntry_TextChanged;
+
+            mgEntries.Add(this);
         }
     }
 }
