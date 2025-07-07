@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -14,16 +15,56 @@ namespace MihaganControls.MgEntry
 
     public abstract class MgEntry : TextBox
     {
-        public readonly static DependencyProperty IsValidProperty = DependencyProperty.Register("IsValid", typeof(bool), typeof(MgEntry), new FrameworkPropertyMetadata(true));
-
-        public readonly static DependencyProperty InvalidInputForegroundProperty = DependencyProperty.Register("InvalidInputForeground", typeof(Brush), typeof(MgEntry), new FrameworkPropertyMetadata(Brushes.Red));
-
-        public readonly static DependencyProperty NormalForegroundProperty = DependencyProperty.Register("NormalForeground", typeof(Brush), typeof(MgEntry), new FrameworkPropertyMetadata(Brushes.Black));
-
-        public readonly static DependencyProperty InvalidInputReactionProperty = DependencyProperty.Register("InvalidInputReaction", typeof(MgInvalidInputReactions), typeof(MgEntry), new FrameworkPropertyMetadata(MgInvalidInputReactions.Ignore));
-
-
         protected string? oldText;
+
+
+        public readonly static DependencyProperty IsValidProperty = DependencyProperty.Register
+            (
+                "IsValid", 
+
+                typeof(bool), 
+                
+                typeof(MgEntry), 
+                
+                new FrameworkPropertyMetadata(true)
+            );
+
+
+        public readonly static DependencyProperty InvalidInputForegroundProperty = DependencyProperty.Register
+            (
+                "InvalidInputForeground", 
+                
+                typeof(Brush), 
+                
+                typeof(MgEntry), 
+                
+                new FrameworkPropertyMetadata(Brushes.Red)
+            );
+
+
+        public readonly static DependencyProperty NormalForegroundProperty = DependencyProperty.Register
+            (
+                "NormalForeground", 
+                
+                typeof(Brush), 
+                
+                typeof(MgEntry), 
+                
+                new FrameworkPropertyMetadata(Brushes.Black)
+            );
+
+
+        public readonly static DependencyProperty InvalidInputReactionProperty = DependencyProperty.Register
+            (
+                "InvalidInputReaction", 
+                
+                typeof(MgInvalidInputReactions), 
+                
+                typeof(MgEntry), 
+                
+                new FrameworkPropertyMetadata(MgInvalidInputReactions.Ignore)
+            );
+
 
         public MgInvalidInputReactions InvalidInputReaction
         {
@@ -79,7 +120,6 @@ namespace MihaganControls.MgEntry
 
         protected virtual bool CheckText()
         {
-
             return true;
         }
 

@@ -1,7 +1,7 @@
 ﻿
 namespace MihaganControls.MgEntry.Interfaces
 {
-    public interface INumericBox <T>
+    public interface INumericEntry <T>
     {
         T Maximum { get; set; }
 

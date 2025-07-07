@@ -1,14 +1,9 @@
 ﻿using MihaganControls.MgEntry.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MihaganControls.MgEntry
 {
-    public class MgInt32Box : MgEntry, INumericBox<int>
+    public class MgInt32Entry : MgEntry, INumericEntry<int>
     {
         public int Maximum
         {
@@ -67,21 +62,23 @@ namespace MihaganControls.MgEntry
                 
                 typeof(int), 
                 
-                typeof(MgInt32Box), 
+                typeof(MgInt32Entry), 
                 
                 new FrameworkPropertyMetadata(Int32.MaxValue - 1)
             );
 
+        
         public DependencyProperty MinimumProperty = DependencyProperty.Register
             (
                 "Minimum", 
                 
                 typeof(int), 
                 
-                typeof(MgInt32Box), 
+                typeof(MgInt32Entry), 
                 
                 new FrameworkPropertyMetadata(Int32.MinValue + 1)
             );
+
 
         public DependencyProperty IsStrictlyMinimumProperty = DependencyProperty.Register
             (
@@ -89,10 +86,11 @@ namespace MihaganControls.MgEntry
 
                 typeof(bool),
 
-                typeof(MgInt32Box),
+                typeof(MgInt32Entry),
 
                 new FrameworkPropertyMetadata(false)
             );
+
 
         public DependencyProperty IsStrictlyMaximumProperty = DependencyProperty.Register
             (
@@ -100,41 +98,17 @@ namespace MihaganControls.MgEntry
 
                 typeof(bool),
 
-                typeof(MgInt32Box),
+                typeof(MgInt32Entry),
 
                 new FrameworkPropertyMetadata(false)
             );
-
-
 
 
         protected override bool CheckText()
         {
             if (int.TryParse(Text,out int result))
             {
-                if (IsStrictlyMaximum)
-                {
-                    if (result >= Maximum)
-                        return false;
-                }
-                else
-                {
-                    if (result > Maximum)
-                        return false;
-                }
-
-                if (IsStrictlyMinimum)
-                {
-                    if (result <= Minimum) 
-                        return false;
-                }
-                else
-                {
-                    if (result < Minimum)
-                        return false;
-                }
-
-                return true;
+                return (IsStrictlyMaximum ? result < Maximum : result <= Maximum) && (IsStrictlyMinimum ? result > Minimum : result >= Minimum);
             }
 
             return false;
